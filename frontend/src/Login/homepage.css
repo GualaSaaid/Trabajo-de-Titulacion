@@ -1,0 +1,81 @@
+/* Contenedor principal */
+.home-container {
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 1;
+  }
+
+  
+  /* Barra lateral */
+  .sidebar {
+    background-color: #b1b1b1; /* Color gris */
+    width: 250px; /* Ancho del panel */
+    height: 100%; /* Altura completa */
+    position: fixed; /* Fijo a la izquierda */
+    left: 0;
+    top: 0;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  /* Contenido principal */
+  .main-content {
+    flex: 1;
+    text-align: center;
+    padding-top: 50px;
+    background-color: rgb(244, 244, 244);
+  }
+  
+  .Logout {
+    margin-top: auto; /* Ajusta el valor según sea necesario */
+  }
+
+  h1 {
+    color: #27a927;
+    margin-bottom: 30px;
+  }
+  
+  .logo-container img {
+    width: 200px;
+    height: auto;
+  }
+  
+  /* Footer */
+  footer {
+    flex: 1;
+    text-align: center;
+    padding-top: 200px; 
+  }
+  
+  .footer-info p {
+    margin: 2px;
+    color: #27a927;
+    text-align: center;
+  }
+  
+  .slogan {
+    color: #27a927;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .submenu {
+    list-style-type: none;
+    padding-right: 10px;
+  }
+  
+  .submenu li {
+    cursor: pointer;
+    padding: 5px 0;
+  }
