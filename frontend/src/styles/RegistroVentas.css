@@ -1,0 +1,21 @@
+.registro-ventas {
+    padding: 20px;
+  }
+  
+  .registro-ventas h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .registro-ventas ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .registro-ventas li {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

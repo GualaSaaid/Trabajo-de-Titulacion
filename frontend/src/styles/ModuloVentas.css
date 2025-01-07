@@ -1,0 +1,63 @@
+.modulo-ventas {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .escaneo {
+    margin-bottom: 20px;
+  }
+  
+  .escaneo input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .productos-venta {
+    margin-bottom: 10px;
+  }
+  
+  .productos-venta ul {
+    list-style-type: none;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+  
+  .productos-venta li {
+    padding: 100px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .procesar-venta {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .procesar-venta:hover {
+    background-color: #45a049;
+  }

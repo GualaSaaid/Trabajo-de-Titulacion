@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo de Venta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .recibo {
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        .detalles {
+            margin-top: 20px;
+        }
+        .detalles th, .detalles td {
+            padding: 5px;
+            text-align: left;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="recibo">
+        <h2>Recibo de Venta</h2>
+        <p><strong>ID Venta:</strong> {{ venta.id }}</p>
+        <p><strong>Cliente:</strong> {{ venta.cliente.nombre if venta.cliente else 'Venta Rápida' }}</p>
+        <p><strong>Fecha:</strong> {{ venta.fecha }}</p>
+        
+        <div class="detalles">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detalle in detalles %}
+                        <tr>
+                            <td>{{ detalle.producto.nombre }}</td>
+                            <td>{{ detalle.cantidad }}</td>
+                            <td>${{ detalle.precio }}</td>
+                            <td>${{ detalle.subtotal }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="total">
+            <p><strong>Total:</strong> ${{ total }}</p>
+        </div>
+    </div>
+</body>
+</html>
