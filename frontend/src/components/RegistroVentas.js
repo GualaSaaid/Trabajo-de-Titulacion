@@ -19,7 +19,9 @@ const RegistroVentas = () => {
       <ul className="list-group">
         {ventas.map((venta) => (
           <li className="list-group-item" key={venta.id}>
-            <strong>ID:</strong> {venta.id} | <strong>Fecha:</strong> {venta.fecha} | <strong>Total:</strong> ${venta.total} | <strong>Estado:</strong> {venta.estado}
+            <strong>ID:</strong> {venta.id} | <strong>Cliente:</strong> {venta.cliente.nombre || 'Consumidor Final'} | 
+            <strong>Comprobante:</strong> {venta.tipo_comprobante} | <strong>Fecha:</strong> {venta.fecha} | 
+            <strong>Total:</strong> ${venta.total} | <strong>Estado:</strong> {venta.estado}
           </li>
         ))}
       </ul>

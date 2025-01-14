@@ -10,7 +10,7 @@ import './App.css';
 import ModuloVentas from './components/ModuloVentas';
 import RegistroVentas from './components/RegistroVentas';
 import VentasList from './components/VentasList';
-import Proveedores from './components/Proveedores';
+import GestionProveedores from './components/GestionProveedores';
 import ClienteList from './components/ClienteList';
 import ClienteForm from './components/ClienteForm';
 
@@ -26,7 +26,7 @@ function App() {
         <Route path="/add-product-manual" element={<AddProductManual />} />
         <Route path="/ventas" element={<ModuloVentas />} />
         <Route path="/registro-ventas" element={<VentasList />} />
-        <Route path="/proveedores" element={<Proveedores />} />
+        <Route path="/proveedores" element={<GestionProveedores />} />
         <Route path="/clientes" element={<ClienteList />} />
         <Route path="/clientes/nuevo" element={<ClienteForm />} />
         <Route path="/clientes/:id/editar" element={<ClienteForm />} />

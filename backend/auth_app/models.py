@@ -1,7 +1,6 @@
 # auth_app/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
@@ -64,36 +63,58 @@ class Venta(models.Model):
         self.save()
 
 class DetalleVenta(models.Model):
-    venta = models.ForeignKey(Venta, related_name='detalles', on_delete=models.CASCADE)
-    producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
+    venta = models.ForeignKey(
+        Venta,
+        on_delete=models.CASCADE,
+        related_name="detalles"  # Relación para acceder desde Venta
+    )
+    producto = models.ForeignKey(
+        Producto,
+        on_delete=models.CASCADE,
+        related_name="detalles"
+    )
     cantidad = models.PositiveIntegerField()
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
-        # Calcular el subtotal al momento de guardar
         self.subtotal = self.cantidad * self.precio_unitario
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.cantidad} x {self.producto.nombre} - Subtotal: {self.subtotal}"
+        return f"DetalleVenta (Producto: {self.producto}, Cantidad: {self.cantidad}, Subtotal: {self.subtotal})"
 
 
 class Proveedor(models.Model):
-    nombre = models.CharField(max_length=255, verbose_name="Nombre del Proveedor")
-    contacto = models.CharField(max_length=255, verbose_name="Persona de Contacto", blank=True, null=True)
-    telefono = models.CharField(max_length=15, verbose_name="Teléfono", blank=True, null=True)
-    email = models.EmailField(verbose_name="Correo Electrónico", blank=True, null=True)
-    direccion = models.TextField(verbose_name="Dirección", blank=True, null=True)
-    ruc = models.CharField(max_length=20, verbose_name="RUC", blank=True, null=True, unique=True)
+    nombre = models.CharField(max_length=255)
+    ruc = models.CharField(max_length=20, unique=True)
+    telefono = models.CharField(max_length=15, blank=True, null=True)
+    direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre
 
-    class Meta:
-        verbose_name = "Proveedor"
-        verbose_name_plural = "Proveedores" 
 
+class Compra(models.Model):
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, related_name="compras")
+    fecha = models.DateTimeField(auto_now_add=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
-from django.db import models
+    def __str__(self):
+        return f"Compra {self.id} - Proveedor: {self.proveedor.nombre} - Total: {self.total}"
+    
 
+class DetalleCompra(models.Model):
+    compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name="detalles")
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name="compras")
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+
+    def save(self, *args, **kwargs):
+        self.subtotal = self.cantidad * self.precio_unitario
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"DetalleCompra (Producto: {self.producto.nombre}, Cantidad: {self.cantidad}, Subtotal: {self.subtotal})"
+        

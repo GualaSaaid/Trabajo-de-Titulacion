@@ -18,15 +18,24 @@ function AddProductForm() {
     marca: '',
   });
   const [products, setProducts] = useState([]);
+  const [showSubMenu, setShowSubMenu] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+
+  const toggleSubMenu = () => {
+    setShowSubMenu(!showSubMenu);
+  };
+
+const handleLogout = () => {
+    const confirmLogout = window.confirm("¿Estás seguro de que deseas salir?");
+    if (confirmLogout) {
+      // Aquí puedes limpiar datos de sesión si es necesario
+      navigate("/"); // Redirige al login
+    }
   };
 
   const agregarProducto = (e) => {
     e.preventDefault();
-
     if (
       !formData.nombre ||
       !formData.precio ||
@@ -58,6 +67,29 @@ function AddProductForm() {
 
   return (
     <div className="add-product-container">
+            <div className="sidebar">
+        <ul>
+          <li onClick={() => navigate('/home')}>☰</li>
+          <li onClick={() => navigate('/ventas')} style={{ cursor: 'pointer' }}>📊 VENTAS</li>
+          <li onClick={toggleSubMenu} style={{ cursor: 'pointer' }}>
+            📦 PRODUCTOS
+            {showSubMenu && (
+              <ul className="submenu">
+                <li onClick={() => navigate('/add-product')}>Crear Producto</li>
+                <li onClick={() => navigate('/products')}>Lista de Productos</li>
+                <li onClick={() => navigate('/add-product-manual')}>Ingresar Producto</li>
+              </ul>
+            )}
+          </li>
+          <li onClick={() => navigate('/clientes')} style={{ cursor: 'pointer' }}>👥 CLIENTES</li>
+          <li>🧺 INVENTARIO</li>
+          <li onClick={() => navigate('/home')} style={{ cursor: 'pointer' }}>💲 PROVEEDORES</li>
+          <li>💼 CAJA</li>
+          <li>🚀 PREDICCIÓN</li>
+          <li onClick={() => navigate('/registro-ventas')} style={{ cursor: 'pointer' }}>🛒 REGISTRO DE VENTAS</li>
+          <li onClick={handleLogout} style={{ cursor: "pointer" }}>🚪 SALIR</li>
+        </ul>
+      </div>
       <h1>Agregar Producto</h1>
       <form onSubmit={agregarProducto} className="add-product-form">
         {/* Formulario de productos */}

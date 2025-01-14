@@ -1,24 +1,26 @@
 from django.contrib.auth import authenticate
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status, viewsets, permissions
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Producto, Venta, DetalleVenta
+from .models import Producto, Venta
+from .models import DetalleVenta
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.template import Context
 import openpyxl
-from .serializers import ProductoSerializer, VentaSerializer, DetalleVentaSerializer, ProveedorSerializer, ProductoPagination, ClienteSerializer
+from .serializers import ProductoSerializer, VentaSerializer, DetalleVentaSerializer, ProveedorSerializer, ProductoPagination, ClienteSerializer, CompraSerializer
 from django.contrib.auth.models import User
 import random
 import pandas as pd
 import string
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from .models import Venta, DetalleVenta, Producto, Proveedor, Cliente
+from .models import Venta, DetalleVenta, Producto, Proveedor, Cliente, Compra
 from django.db import transaction
 
 
@@ -48,34 +50,73 @@ class ProductoList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
-class ProductoDetail(APIView):
-    def get(self, request, pk):
-        try:
-            producto = Producto.objects.get(pk=pk)
-        except Producto.DoesNotExist:
-            return Response({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = ProductoSerializer(producto)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    def put (self, request, pk):
-        try:
-            producto = Producto.objects.get(pk=pk)
-        except Producto.DoesNotExist:
-            return Response({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = ProductoSerializer(producto, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+class ProductoDetailView(APIView):
     def delete(self, request, pk):
         try:
             producto = Producto.objects.get(pk=pk)
+            # Desvincula los detalles de venta
+            DetalleVenta.objects.filter(producto=producto).update(producto=None)
+            producto.delete()
+            return Response({"message": "Producto eliminado correctamente"}, status=status.HTTP_204_NO_CONTENT)
         except Producto.DoesNotExist:
             return Response({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-        producto.delete()
-        return Response({"message": "Producto eliminado con éxito"}, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ProductoDetail(APIView):
+    def delete(self, request, pk):
+        try:
+            producto = Producto.objects.get(pk=pk)
+            producto.detalles.all().delete()  # Si related_name='detalles'
+            producto.delete()
+            return Response({"message": "Producto eliminado con éxito"}, status=status.HTTP_204_NO_CONTENT)
+        except Producto.DoesNotExist:
+            return Response({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def put(self, request, pk):
+        try:
+            producto = Producto.objects.get(pk=pk)
+            serializer = ProductoSerializer(producto, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Producto.DoesNotExist:
+            return Response({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": f"Error inesperado: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class ProductoViewSet(ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+class CrearDetalleVentaAPIView(APIView):
+    def post(self, request):
+        try:
+            venta_id = request.data.get('venta_id')
+            producto_id = request.data.get('producto_id')
+            cantidad = request.data.get('cantidad')
+            precio_unitario = request.data.get('precio_unitario')
+
+            venta = Venta.objects.get(id=venta_id)
+            producto = Producto.objects.get(id=producto_id)
+
+            detalle = DetalleVenta.objects.create(
+                venta=venta,
+                producto=producto,
+                cantidad=cantidad,
+                precio_unitario=precio_unitario
+            )
+
+            return Response({
+                "message": "Detalle de venta creado exitosamente",
+                "subtotal": detalle.subtotal
+            }, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -106,7 +147,9 @@ def reset_password_request(request):
     except User.DoesNotExist:
         return JsonResponse({'error': 'El correo no está registrado.'}, status=status.HTTP_404_NOT_FOUND)
 
-
+class DetalleVentaViewSet(viewsets.ModelViewSet):
+    queryset = DetalleVenta.objects.all()
+    serializer_class = DetalleVentaSerializer
 
 
 @api_view(['POST'])
@@ -172,8 +215,6 @@ def upload_products_excel(request):
     return JsonResponse({"error": "No se recibió ningún archivo Excel."}, status=400)
 
 
-
-
 class VentaViewSet(viewsets.ModelViewSet):
     queryset = Venta.objects.all()
     serializer_class = VentaSerializer
@@ -182,9 +223,11 @@ class VentaViewSet(viewsets.ModelViewSet):
         ventas = self.queryset
         data = [
             {
-                "venta_id": venta.id,
+                "id": venta.id,
                 "fecha": venta.fecha.strftime("%Y-%m-%d %H:%M:%S"),
                 "total": float(venta.total),
+                "estado": venta.estado,
+                "cliente": venta.cliente.nombre if venta.cliente else "Consumidor Final",
                 "productos": [
                     {
                         "producto_id": detalle.producto.id,
@@ -193,12 +236,13 @@ class VentaViewSet(viewsets.ModelViewSet):
                         "precio_unitario": float(detalle.precio_unitario),
                         "subtotal": float(detalle.subtotal),
                     }
-                    for detalle in venta.detalleventa.all()
-                ]
+                    for detalle in venta.detalles.all()
+                ],
             }
             for venta in ventas
         ]
         return Response(data)
+
 
 @api_view(['GET'])
 def buscar_producto_por_codigo_barra(request, codigo_barra):
@@ -261,12 +305,12 @@ def procesar_venta(request):
 @api_view(['POST'])
 def registrar_venta(request):
     """
-    Registra una venta con productos y opcionalmente un cliente asociado.
+    Registra una venta con productos y opcionalmente un cliente asociado o datos de factura.
     """
     data = request.data
 
     try:
-        # Verificar si se proporciona un cliente
+        # Verificar si se proporciona un cliente o datos de factura
         cliente_id = data.get('cliente_id')
         cliente = None
         venta_tipo = "Venta rápida"  # Por defecto es una venta rápida
@@ -274,6 +318,20 @@ def registrar_venta(request):
         if cliente_id:
             cliente = get_object_or_404(Cliente, id=cliente_id)
             venta_tipo = f"Venta asociada al cliente: {cliente.nombre}"
+        else:
+            # Cliente genérico o datos de factura
+            cedula = data.get('cedula', None)
+            if cedula:
+                cliente = Cliente.objects.get_or_create(
+                    ruc_nit=cedula,
+                    defaults={"nombre": "Cliente Factura"}
+                )[0]
+                venta_tipo = f"Venta con factura, cliente: {cliente.nombre}"
+            else:
+                cliente = Cliente.objects.get_or_create(
+                    ruc_nit='99999999',
+                    defaults={"nombre": "Consumidor Final"}
+                )[0]
 
         # Crear la venta
         venta = Venta(cliente=cliente, estado="PENDIENTE", total=0)
@@ -310,10 +368,26 @@ def registrar_venta(request):
         venta.estado = "COMPLETADA"
         venta.save()
 
-        return JsonResponse({"message": f"{venta_tipo}. Venta registrada exitosamente."}, status=201)
+        return JsonResponse({
+            "id": venta.id,
+            "cliente": cliente.nombre,
+            "cedula": cliente.ruc_nit if cedula else None,
+            "productos": [
+                {
+                    "producto_id": detalle.producto.id,
+                    "nombre": detalle.producto.nombre,
+                    "cantidad": detalle.cantidad,
+                    "precio_unitario": float(detalle.precio),
+                    "subtotal": float(detalle.subtotal),
+                }
+                for detalle in venta.detalles.all()
+            ],
+            "total": float(total),
+        }, status=201)
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=400)
+
 
 
 @api_view(['GET'])
@@ -335,35 +409,23 @@ def obtener_ventas(request):
         return Response({"ventas": "datos_serializados"})
     
 
-
-
-class ProveedorViewSet(viewsets.ModelViewSet):
+class ProveedorViewSet(ModelViewSet):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
 
 
+class CompraViewSet(ModelViewSet):
+    queryset = Compra.objects.all()
+    serializer_class = CompraSerializer
 
-
-class ProductoListView(APIView):
-    def get(self, request, *args, **kwargs):
-        productos = Producto.objects.all()
-        paginator = PageNumberPagination()
-        paginator.page_size = 5  # Limitar a 5 productos por página
-        result_page = paginator.paginate_queryset(productos, request)
-        serializer = ProductoSerializer(result_page, many=True)
-        return paginator.get_paginated_response(serializer.data)
-    
 
 class ProductoPagination(PageNumberPagination):
-    page_size = 5  # Número de productos por página
+    page_size = 5  # Cambia esto si deseas más productos por página
 
-    def get_paginated_response(self, data):
-        return Response({
-            'count': self.page.paginator.count,
-            'next': self.get_next_link(),
-            'previous': self.get_previous_link(),
-            'results': data
-        })
+class ProductoListView(ListAPIView):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+    pagination_class = ProductoPagination
 
 
 
