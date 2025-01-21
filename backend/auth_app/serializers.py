@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from .models import Producto, Venta, DetalleVenta, Proveedor, Compra, DetalleCompra
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -71,18 +72,26 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
 
 class DetalleCompraSerializer(serializers.ModelSerializer):
+    nombre_producto = serializers.SerializerMethodField()
+
     class Meta:
         model = DetalleCompra
-        fields = ['producto', 'cantidad', 'precio_unitario', 'subtotal']
+        fields = ['producto', 'nombre_producto', 'cantidad', 'precio_unitario', 'subtotal']
 
+    def get_nombre_producto(self, obj):
+        return obj.producto.nombre  # Devuelve el nombre del producto
 
 
 class CompraSerializer(serializers.ModelSerializer):
     detalles = DetalleCompraSerializer(many=True)
+    nombre_proveedor = serializers.SerializerMethodField()
 
     class Meta:
         model = Compra
-        fields = ['id', 'proveedor', 'fecha', 'total', 'detalles']
+        fields = ['id', 'proveedor', 'nombre_proveedor', 'fecha', 'total', 'detalles']
+
+    def get_nombre_proveedor(self, obj):
+        return obj.proveedor.nombre  # Devuelve el nombre del proveedor
 
     def create(self, validated_data):
         detalles_data = validated_data.pop('detalles')

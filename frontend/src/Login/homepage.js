@@ -20,10 +20,8 @@ function HomePage() {
   return (
     <div className="home-container">
       <div className="sidebar">
-        <ul>
-          <li><span>☰</span></li>
+      <ul>
           <li onClick={() => navigate('/ventas')} style={{ cursor: 'pointer' }}>📊 VENTAS</li>
-          
           <li onClick={toggleSubMenu} style={{ cursor: 'pointer' }}>
             📦 PRODUCTOS
             {showSubMenu && (
@@ -40,8 +38,11 @@ function HomePage() {
           <li>💼 CAJA</li>
           <li>🚀 PREDICCIÓN</li>
           <li onClick={() => navigate('/registro-ventas')} style={{ cursor: 'pointer' }}>🛒 REGISTRO DE VENTAS</li>
+          <li onClick={() => navigate('/compras')} style={{ cursor: 'pointer' }}>🛍️ COMPRAS</li>
+          <li onClick={() => navigate('/lista-compras')} style={{ cursor: 'pointer' }}>📋 LISTA DE COMPRAS</li> {/* Nuevo elemento */}
           <li onClick={handleLogout} style={{ cursor: "pointer" }}>🚪 SALIR</li>
         </ul>
+
       </div>
       <div className="main-content">
         <h1>ABASTOS EL AHORRO</h1>

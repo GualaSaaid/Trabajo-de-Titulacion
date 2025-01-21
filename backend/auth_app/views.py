@@ -515,3 +515,10 @@ def generar_recibo(request, venta_id):
 
     except Venta.DoesNotExist:
         return JsonResponse({'error': 'Venta no encontrada'}, status=404)
+    
+
+@api_view(['GET'])
+def listar_compras(request):
+    compras = Compra.objects.prefetch_related('detalles').all()
+    serializer = CompraSerializer(compras, many=True)
+    return Response(serializer.data)    

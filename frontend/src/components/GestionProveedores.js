@@ -13,13 +13,14 @@ const GestionProveedores = () => {
     const cargarProveedores = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/proveedores/');
-            console.log("Respuesta de la API:", response.data); // Verifica qué devuelve la API
-            setProveedores(response.data.results); // Correcto
+            console.log("Respuesta de la API:", response.data); // Agrega este log
+            setProveedores(response.data.results || response.data || []);
         } catch (error) {
             console.error("Error al cargar proveedores:", error.response?.data || error.message);
             alert("Error al cargar proveedores.");
         }
     };
+    
     
 
     // Manejar cambios en el formulario
@@ -104,17 +105,17 @@ const GestionProveedores = () => {
             </form>
             <h3>Lista de Proveedores</h3>
             <ul>
-                {Array.isArray(proveedores) && proveedores.length > 0 ? (
-                    proveedores.map((p) => (
-                        <li key={p.id}>
-                            <span>{p.nombre} - {p.ruc} - {p.telefono} - {p.direccion}</span>
-                            <button onClick={() => editarProveedor(p)}>Editar</button>
-                            <button onClick={() => eliminarProveedor(p.id)}>Eliminar</button>
-                        </li>
-                    ))
-                ) : (
-                    <li>No hay proveedores disponibles</li> // Mensaje si no hay proveedores
-                )}
+            {Array.isArray(proveedores) && proveedores.length > 0 ? (
+                proveedores.map((p) => (
+                    <li key={p.id}>
+                        <span>{p.nombre} - {p.ruc} - {p.telefono} - {p.direccion}</span>
+                        <button onClick={() => editarProveedor(p)}>Editar</button>
+                        <button onClick={() => eliminarProveedor(p.id)}>Eliminar</button>
+                    </li>
+                ))
+            ) : (
+                <li>No hay proveedores disponibles</li>
+            )}
             </ul>
         </div>
     );

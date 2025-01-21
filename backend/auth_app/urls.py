@@ -13,6 +13,7 @@ from .views import (
     ProductoListView,
     listar_clientes,
     generar_recibo,
+    listar_compras,
 )
 from rest_framework.routers import DefaultRouter
 from .views import VentaViewSet, ProveedorViewSet, ClienteViewSet, DetalleVentaViewSet, CrearDetalleVentaAPIView, ProductoViewSet, CompraViewSet
@@ -41,6 +42,7 @@ urlpatterns = [
     path('escanear_producto/', escanear_producto, name='escanear_producto'),
     path('venta/<int:venta_id>/recibo/', generar_recibo, name='generar_recibo'),
     path('crear-detalleventa/', CrearDetalleVentaAPIView.as_view(), name='crear-detalleventa'),
+    path('api/compras/', listar_compras, name='listar_compras'),
 
 ]
 

@@ -22,6 +22,16 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
+class Lote(models.Model):
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name="lotes")
+    cantidad = models.IntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_caducidad = models.DateField()
+
+    def __str__(self):
+        return f"Lote de {self.producto.nombre} - Cantidad: {self.cantidad}"
+
+
 
 class CustomUser(AbstractUser):
     # Agrega campos personalizados aquí si es necesario
@@ -87,12 +97,13 @@ class DetalleVenta(models.Model):
 
 class Proveedor(models.Model):
     nombre = models.CharField(max_length=255)
-    ruc = models.CharField(max_length=20, unique=True)
+    ruc = models.CharField(max_length=20, unique=True, default="DEFAULT_RUC")  # Agrega un valor predeterminado aquí
     telefono = models.CharField(max_length=15, blank=True, null=True)
     direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre
+
 
 
 class Compra(models.Model):

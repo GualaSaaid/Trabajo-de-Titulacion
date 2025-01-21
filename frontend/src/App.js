@@ -13,6 +13,10 @@ import VentasList from './components/VentasList';
 import GestionProveedores from './components/GestionProveedores';
 import ClienteList from './components/ClienteList';
 import ClienteForm from './components/ClienteForm';
+import GestionComprasFEFO from './components/GestionComprasFEFO';
+import ListaCompras from "./components/ListaCompras";
+import GestionLotes from "./components/GestionLotes"; 
+
 
 function App() {
   return (
@@ -30,6 +34,9 @@ function App() {
         <Route path="/clientes" element={<ClienteList />} />
         <Route path="/clientes/nuevo" element={<ClienteForm />} />
         <Route path="/clientes/:id/editar" element={<ClienteForm />} />
+        <Route path="/compras" element={<GestionComprasFEFO />} />
+        <Route path="/lista-compras" element={<ListaCompras />} />
+        <Route path="/lotes" element={<GestionLotes />} />
       </Routes>
     </Router>
   );
