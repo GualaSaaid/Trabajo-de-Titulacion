@@ -1,0 +1,151 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Ajuste del contenedor principal */
+.clients-list-container {
+  flex-grow: 1;
+  margin-left: 380px; /* Ajuste para mayor alineación a la derecha */
+  padding: 50px;
+  max-width: 85%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.list-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+/* Campo de búsqueda */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+}
+
+/* Estilos de la tabla */
+.clients-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.clients-table th {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.clients-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.clients-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.clients-table tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.edit-button {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.delete-button {
+  background-color: #d8071c;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #007bff;
+}
+
+.delete-button:hover {
+  background-color: #ff0019;
+}
+
+/* Estilos de la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+}
+
+.pagination button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+/* Botón de regresar */
+.home-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.home-button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #1e3a8a;
+}

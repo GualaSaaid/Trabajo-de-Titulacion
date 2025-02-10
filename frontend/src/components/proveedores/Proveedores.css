@@ -1,0 +1,143 @@
+/* Contenedor principal */
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Estilos del contenedor del formulario */
+  .proveedor-container {
+    flex-grow: 1;
+    margin-left: 300px;
+    padding: 50px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(24, 90, 212, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Efecto al pasar el mouse */
+  .proveedor-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(24, 90, 212, 0.3);
+  }
+  
+  /* Título */
+  .proveedor-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Estilos del formulario */
+  .proveedor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Filas del formulario */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  
+  /* Input con efectos */
+  .input-group {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .input-group label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Efecto al interactuar con los inputs */
+  .input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(37, 134, 237, 0.6);
+    outline: none;
+  }
+  
+  /* Botones */
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  /* Botón de guardar */
+  .submit-button {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* Botón de regresar */
+  .back-button {
+    background: #ff0000d6;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .back-button:hover {
+    background: #d80000;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .proveedor-container {
+      margin-left: 0;
+      width: 90%;
+      margin: auto;
+    }
+  
+    .form-row {
+      flex-direction: column;
+    }
+  
+    .form-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

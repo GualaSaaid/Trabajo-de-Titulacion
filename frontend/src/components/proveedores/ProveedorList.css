@@ -1,0 +1,156 @@
+.proveedores-list-container {
+    display: flex;
+    height: 75vh;
+    background-color: #f8f9fa;
+    justify-content: center;
+    align-items: center;
+    padding-left: 550px; /* Ajusta para evitar el espacio blanco */
+}
+
+.sidebar {
+    width: 260px;
+    background: #1e293b;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    left: 0;
+    top: 0;
+}
+
+.proveedores-content {
+    width: 100%;
+    max-width: 1100px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.list-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #001f59;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.search-container input {
+    width: 50%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.search-container input:focus {
+    border-color: #1e3a8a;
+    outline: none;
+}
+
+.proveedores-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.proveedores-table th {
+    background: #1e3a8a;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.proveedores-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.proveedores-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit, .delete {
+    border: none;
+    padding: 8px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit {
+    background: #007bff;
+    color: white;
+}
+
+.delete {
+    background: #dc3545;
+    color: white;
+}
+
+.edit:hover {
+    background: #0056b3;
+}
+
+.delete:hover {
+    background: #c82333;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination button {
+    border: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 6px;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.pagination .active {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.home-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.home-button {
+    background: #064e96;
+    color: white;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background: #1554dceb;
+}

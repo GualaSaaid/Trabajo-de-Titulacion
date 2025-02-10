@@ -1,0 +1,141 @@
+/* Contenedor principal */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Ajuste del formulario para que encaje con el sidebar */
+.products-list-container {
+  flex-grow: 1;
+  padding: 40px;
+  margin-left: 360px; /* Ajuste para evitar superposición con el sidebar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos de la tabla */
+.products-table {
+  width: 100%;
+  max-width: 90%;
+  border-collapse: collapse;
+}
+
+/* Ajuste de columnas */
+.column-nombre {
+  width: 50%; /* Más grande para el nombre */
+}
+
+.column-medium {
+  width: 10%; /* Tamaño medio para descripción */
+}
+
+.column-small {
+  width: 10%; /* Pequeño para precio, stock y código */
+}
+
+.column-acciones {
+  width: 15%; /* Espacio para botones de acción */
+}
+
+/* Estilos de celdas */
+.products-table th,
+.products-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.products-table th {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.products-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.products-table tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.edit-button {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+}
+
+.pagination button {
+  background-color: #1e3a8a;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #1e3a8a;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+/* Botón de regresar */
+.home-button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.home-button:hover {
+  background-color: #1e3a8a;
+}

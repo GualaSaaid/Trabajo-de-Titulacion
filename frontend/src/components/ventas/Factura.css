@@ -1,0 +1,101 @@
+/* Estilo general del contenedor */
+.factura-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 25px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Título principal */
+.factura-title {
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Estilo de las secciones */
+.factura-datos, .factura-cliente {
+  width: 90%;
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.factura-datos:hover, .factura-cliente:hover {
+  transform: scale(1.02);
+}
+
+/* Títulos de las secciones */
+.factura-datos h3, .factura-cliente h3 {
+  color: #34495e;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Lista de productos */
+
+
+/* Total de la venta */
+.total-venta {
+  font-size: 22px;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Select y inputs */
+.cliente-dropdown, input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus, .cliente-dropdown:focus {
+  border-color: #3498db;
+  box-shadow: 0px 0px 6px rgba(52, 152, 219, 0.5);
+}
+
+/* Botones */
+.factura-button, .back-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.factura-button {
+  background: #3498db;
+  color: white;
+  font-weight: bold;
+}
+
+.factura-button:hover {
+  background: #2980b9;
+}
+
+.back-button {
+  background: #e74c3c;
+  color: white;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background: #c0392b;
+}

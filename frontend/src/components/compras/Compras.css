@@ -1,0 +1,178 @@
+/* Contenedor principal */
+.compras-container {
+  display: flex;
+  justify-content: flex-end; /* Alineado a la derecha */
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Contenido de compras */
+.compras-content {
+  width: 70%;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.compras-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+/* Formulario */
+.compras-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Etiquetas */
+.compras-form label {
+  font-weight: bold;
+}
+
+/* Campos de entrada y select */
+.compras-form select,
+.compras-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+/* Sección de detalles */
+.detalle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #99cf9f;
+  padding: 8px 50px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+/* Botón de quitar producto */
+.quitar-producto {
+  background: none;
+  border: none;
+  color: #e1140d;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.quitar-producto:hover {
+  transform: scale(1.1);
+}
+
+/* Botones */
+.agregar-producto,
+.registrar-compra {
+  background: #0056b3;
+  color: white;
+  border: none;
+  padding: 20px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agregar-producto:hover {
+  background: #00ff22;
+}
+
+.agregar-producto {
+  background: #58df03;
+}
+
+.registrar-compra {
+  background: #0056b3;
+}
+
+.registrar-compra:hover {
+  background: #0056b3;
+}
+
+/* Historial de compras */
+.compras-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.compras-table th,
+.compras-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.compras-table th {
+  background: #0056b3;
+  color: white;
+}
+
+.compras-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 6px;
+}
+
+.pagination button {
+  background: #0056b3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #0056b3;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Botón atrás */
+.back-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.back-button {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-button:hover {
+  background: #5a6268;
+}

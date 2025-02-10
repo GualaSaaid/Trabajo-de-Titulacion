@@ -1,0 +1,103 @@
+/* Contenedor principal */
+.pagos-compra-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Contenido */
+.pagos-compra-content {
+  width: 60%;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.pagos-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+/* Formulario */
+.pagos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Etiquetas */
+.pagos-form label {
+  font-weight: bold;
+}
+
+/* Inputs y Select */
+.pagos-form select,
+.pagos-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+/* Botón registrar pago */
+.registrar-pago {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.registrar-pago:hover {
+  background: #0056b3;
+}
+
+/* Tabla */
+.pagos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.pagos-table th,
+.pagos-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.pagos-table th {
+  background: #007bff;
+  color: white;
+}
+
+/* Botón atrás */
+.back-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.back-button {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #5a6268;
+}

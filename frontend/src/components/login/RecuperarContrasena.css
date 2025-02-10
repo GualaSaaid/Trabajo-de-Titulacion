@@ -1,0 +1,115 @@
+/* 📌 Fondo con degradado suave */
+.recuperar-contrasena-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa, #dde1e7);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 📌 Contenedor principal */
+.recuperar-contrasena {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+/* 📌 Título */
+.recuperar-contrasena h2 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* 📌 Formularios */
+.recuperar-contrasena form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 📌 Etiquetas */
+.recuperar-contrasena label {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+/* 📌 Campos de entrada */
+.recuperar-contrasena input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 📌 Efecto al enfocar */
+.recuperar-contrasena input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+/* 📌 Botón de envío */
+.recuperar-contrasena button {
+    margin-top: 15px;
+    padding: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* 📌 Botón de regreso */
+.boton-regresar {
+    margin-top: 15px;
+    padding: 10px;
+    background: #e31c1c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.boton-regresar:hover {
+    background: #f80e0e;
+}
+
+
+
+/* 📌 Mensaje de respuesta */
+.recuperar-contrasena p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* 📌 Estilo del código de recuperación */
+.codigo-recuperacion {
+    font-size: 16px;
+    font-weight: bold;
+    color: #dc3545;
+    background: #f8d7da;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* 📌 Mensaje de éxito */
+.exito {
+    color: #28a745;
+    font-weight: bold;
+}
+

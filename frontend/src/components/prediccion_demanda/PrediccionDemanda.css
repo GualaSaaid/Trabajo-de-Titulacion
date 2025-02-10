@@ -1,0 +1,161 @@
+/* 📌 Fondo elegante con mejor distribución */
+.prediccion-demanda {
+    background: linear-gradient(135deg, #f8f9fa, #e3e7eb);
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 📌 Contenedor principal centrado */
+.prediccion-demanda .prediccion-container {
+    max-width: 700px;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* 📌 Título con mejor efecto */
+.prediccion-demanda .titulo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Formularios alineados mejor */
+.prediccion-demanda .formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.prediccion-demanda .input-fecha {
+    padding: 12px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #f1f5f9;
+    color: #333;
+    text-align: center;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease-in-out;
+}
+
+.prediccion-demanda .input-fecha:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 8px rgba(30, 58, 138, 0.3);
+    outline: none;
+}
+
+/* 📌 Botones con efectos */
+.prediccion-demanda .boton, 
+.prediccion-demanda .boton-regresar {
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    padding: 14px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+.prediccion-demanda .boton:hover, 
+.prediccion-demanda .boton-regresar:hover {
+    background: #172554;
+}
+
+.prediccion-demanda .boton-regresar {
+    background: #dc2626;
+    margin-left: 10px;
+}
+
+.prediccion-demanda .boton-regresar:hover {
+    background: #b91c1c;
+}
+
+/* 📌 Contenedor de gráficos con mejor diseño */
+.prediccion-demanda .graficos-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(240, 240, 240, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Tarjetas de gráficos con un efecto más atractivo */
+.prediccion-demanda .grafico-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.prediccion-demanda .grafico-card:hover {
+    transform: scale(1.03);
+}
+
+/* 📌 Mensajes de error con mejor visibilidad */
+.prediccion-demanda .error {
+    color: #d63031;
+    font-weight: bold;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 📌 Mensajes informativos */
+.prediccion-demanda .mensaje {
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* 📌 Descripción de predicciones con mejor espaciado */
+.descripcion-container {
+    text-align: left;
+    padding: 20px;
+    background: rgba(245, 245, 245, 0.98);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+}
+
+.descripcion-linea {
+    font-size: 18px;
+    line-height: 1.8; /* Espaciado entre líneas mejorado */
+    color: #333;
+    font-weight: 500;
+}
+
+/* 📌 Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .prediccion-demanda .prediccion-container {
+        width: 95%;
+    }
+
+    .prediccion-demanda .input-fecha {
+        width: 100%;
+    }
+}
